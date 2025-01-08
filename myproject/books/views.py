@@ -1,12 +1,16 @@
 from django.shortcuts import render
-from .models import Book
+
+def index(request):
+    return render(request, 'index.html')  # Renderiza la página de inicio
 
 def list_books(request):
-    # Filtrar libros con valoración mayor a 1500
-    high_rating_books = Book.objects.filter(rating__gt=1500)
-    # Obtener todos los libros
-    all_books = Book.objects.all()
-    return render(request, 'list_books.html', {
-        'high_rating_books': high_rating_books,
-        'all_books': all_books,
-    })
+    books = [
+        {'title': 'Django 3 Web Development Cookbook Fourth Edition', 'author': 'Aidas Bendoraitis', 'rating': 3250},
+        {'title': 'Two Scoops of Django 3.x', 'author': 'Daniel Feldroy', 'rating': 1570},
+        {'title': 'El libro de Django', 'author': 'Adrian Holovaty', 'rating': 1200},
+        {'title': 'Python Web Development with Django', 'author': 'Jeff Forcier', 'rating': 1400},
+        {'title': 'Django for Professionals', 'author': 'William S. Vincent', 'rating': 2100},
+        {'title': 'Django for APIs', 'author': 'William S. Vincent', 'rating': 2540},
+    ]
+    high_rated_books = [book for book in books if book['rating'] > 1500]
+    return render(request, 'list_books.html', {'books': books, 'high_rated_books': high_rated_books})

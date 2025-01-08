@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import list_books
+from . import views
 
 urlpatterns = [
-    path('list_books/', list_books, name='list_books'),
+    path('', views.index, name='index'),  # Redirige a la página de inicio
+    path('list_books/', views.list_books, name='list_books'),  # Redirige al listado de libros
 ]
